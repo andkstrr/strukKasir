@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $uang_dibayar >= $totalBelanja): ?>
-    <h2 class="text-center mt-5">Bukti Pembayaran</h2>
+    <h2 class="text-center mt-5 mb-3">Bukti Pembayaran</h2>
     <!-- Tampilkan informasi pembayaran -->
     <p>No. Transaksi: <?= rand(100000000, 999999999); ?></p>
     <p>Bulan, tanggal: <?= date('F d, Y'); ?></p>
