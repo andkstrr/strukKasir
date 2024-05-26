@@ -136,7 +136,7 @@ if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
                 <th colspan="3">Rp <?= number_format($totalHarga, 0, ',', '.'); ?></th>
             </tr>
         </tfoot>
-    </table>
+    </table> 
 </div>
 
 <!-- Link to Bootstrap JS and dependencies -->
