@@ -43,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="container mt-5">
     <h2 class="text-center mb-4">Pembayaran</h2>
-    <h4>Total Belanja: Rp <?= number_format($totalBelanja, 0, ',', '.') ?></h4>
+    <!-- <h4>Total Belanja: Rp <?=  number_format($totalBelanja, 0, ',', '.')  ?></h4> -->
+    <h5>Masukkan Nominal Uang :</h5>
     <form action="" method="POST" class="mt-4">
         <div class="input-group mb-3">
             <!-- Form untuk menginput nominal pembayaran -->
@@ -56,8 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $uang_dibayar >= $totalBelanja): ?>
     <h2 class="text-center mt-5 mb-3">Bukti Pembayaran</h2>
     <!-- Menampilkan informasi pembayaran -->
-    <p>No. Transaksi: <?= rand(100000000, 999999999); ?></p>
-    <p>Bulan, tanggal: <?= date('F d, Y'); ?></p>
+    <div class="receipt-text d-flex">
+        <p>No. Transaksi . <p class="text-secondary""> #<?= rand(100000000, 999999999); ?></p></p>
+    </div>
+    <div class="receipt-text d-flex">
+        <p>Bulan, tanggal . <p class="text-secondary""> #<?= date('F d, Y'); ?></p></p>
+    </div>
     <table class="table">
         <thead>
             <tr>
