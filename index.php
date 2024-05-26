@@ -2,15 +2,17 @@
 session_start();
 $buttonPayment = null;
 $buttonHapus = null;
-$dataAwal = false; // Inisialisasi di luar blok if
+$dataAwal = false;
 
 if (isset($_POST['btn'])) {
+    # Mengambil data dari form
     $nama = $_POST['nama'];
     $harga = $_POST['harga'];
     $jumlah = $_POST['jumlah'];
 
     if (isset($_SESSION['data_barang'])) {
         foreach ($_SESSION['data_barang'] as $data) {
+            # Pengkondisian jika ada nama barang yang sama
             if ($data['nama'] == $nama) {
                 $dataAwal = true;
                 break;
@@ -18,7 +20,8 @@ if (isset($_POST['btn'])) {
         }
     }
 
-    if (!$dataAwal) {
+    if (!$dataAwal) { 
+        # Menambahkan data pada form / session
         $_SESSION['data_barang'][] = [
             "nama" => $nama,
             "harga" => $harga,
@@ -29,6 +32,7 @@ if (isset($_POST['btn'])) {
 }
 
 if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
+    # Menampilkan button payment jika data sudah muncul
     $buttonPayment = '<a href="payment.php" class="btn btn-success mt-3"><i class="fa-solid fa-credit-card"></i> Bayar</a>';
 }
 
@@ -59,7 +63,7 @@ if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
                 <input type="number" name="jumlah" class="form-control" placeholder="Jumlah" required>
             </div>
         </div>
-        <button type="submit" name="btn" class="btn btn-primary mt-3"><i class="fas fa-cart-plus"></i> Tambah</button>
+        <button type="submit" name="btn" class="btn btn-primary mt-3"><i class="fas fa-cart-plus"></i> Tambah</button>  
         <?= $buttonPayment; ?>
     </form>
         
@@ -67,11 +71,13 @@ if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
     <?php
     if (isset($_POST['btn'])) {
         if ($dataAwal) {
+            # Jika data barang sudah ada
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Data barang sudah ada!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
         } else {
+            # Jika data berhasil ditambahkan 
             echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
                     Data barang berhasil ditambahkan!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -104,6 +110,7 @@ if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
                     ?>
                     <tr>
                         <td><?= $i++ ?></td>
+                        <!-- Menampilkan nama, harga, jumlah, dan total barang -->
                         <td><?= htmlspecialchars($data['nama']); ?></td>
                         <td>Rp <?= number_format($data['harga'], 0, ',', '.'); ?></td>
                         <td><?= htmlspecialchars($data['jumlah']); ?></td>
@@ -122,7 +129,7 @@ if (isset($_SESSION['data_barang']) && !empty($_SESSION['data_barang'])) {
         <tfoot>
             <tr>
                 <th colspan="3" class="table-secondary">Total Barang</th>
-                <th colspan="3"><?= $totalBarang; ?></th>
+                <th colspan="3"><?= $totalBarang; ?></th> 
             </tr>
             <tr>
                 <th colspan="3" class="table-secondary">Total Harga</th>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-# Inisialisasi variabel
 $totalBelanja = 0;
 $uang_dibayar = 0;
 $kembalian = 0;
@@ -47,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h4>Total Belanja: Rp <?= number_format($totalBelanja, 0, ',', '.') ?></h4>
     <form action="" method="POST" class="mt-4">
         <div class="input-group mb-3">
+            <!-- Form untuk menginput nominal pembayaran -->
             <span class="input-group-text">Rp</span>
             <input type="number" name="uang_dibayar" class="form-control" placeholder="Masukan Nominal Pembayaran" required>
         </div>
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && $uang_dibayar >= $totalBelanja): ?>
     <h2 class="text-center mt-5 mb-3">Bukti Pembayaran</h2>
-    <!-- Tampilkan informasi pembayaran -->
+    <!-- Menampilkan informasi pembayaran -->
     <p>No. Transaksi: <?= rand(100000000, 999999999); ?></p>
     <p>Bulan, tanggal: <?= date('F d, Y'); ?></p>
     <table class="table">
@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <tbody>
             <?php foreach ($_SESSION['data_barang'] as $barang): ?>
             <tr>
+                <!-- Memunculkan nama, harga, jumlah dan total harga barang -->
                 <td><?= $barang['nama'] ?></td>
                 <td>Rp <?= number_format($barang['harga'], 0, ',', '.') ?></td>
                 <td><?= $barang['jumlah'] ?></td>
@@ -78,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endforeach; ?>
         </tbody>
     </table>
+    <!-- Memunculkan nominal pembayaran -->
     <p>Uang yang Dibayarkan: Rp <?= number_format($uang_dibayar, 0, ',', '.') ?></p>
     <p>Total: Rp <?= number_format($totalBelanja, 0, ',', '.') ?></p>
     <p>Kembalian: Rp <?= number_format($kembalian, 0, ',', '.') ?></p>
